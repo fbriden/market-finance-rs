@@ -8,4 +8,16 @@ keywords = [ "finance", "stocks" ]
 readme = "README.md"
 edition = "2018"
 
+[features]
+
+# Provides the ability to go and retrieve symbols for markets - ie. the
+# ability to get a list of all stock symbols currenlty trading on the NYSE.
+#
+# Getting the symbols for a market (or subset of market) requires the ability
+# to pull data from sites and process it
+symbols = [ "csv", "ftp", "ureq" ]
+
 [dependencies]
+csv = { version = "1.1", optional = true }
+ftp = { version = "3.0.1", optional = true }
+ureq = { version = "0.12", optional = true }
