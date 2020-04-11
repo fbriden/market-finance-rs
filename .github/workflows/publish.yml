@@ -12,6 +12,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build
-      run: cargo build --verbose
+      run: cargo build
     - name: Publish
-      run: cargo publish --allow-dirty --token "${{ secrets.CARGO_KEY }}"
+      run: cargo publish --token "${{ secrets.CARGO_KEY }}"

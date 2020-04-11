@@ -8,4 +8,13 @@ keywords = [ "finance", "stocks" ]
 readme = "README.md"
 edition = "2018"
 
+[features]
+
+# By default only allow formatting to keep the dependency list as small as possible
+default = [ "formatting" ]
+
+# Allows for better formatting of structures - typically around date / times
+formatting = [ "chrono" ]
+
 [dependencies]
+chrono = { version = "0.4", optional = true }
