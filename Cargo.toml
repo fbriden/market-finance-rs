@@ -8,6 +8,11 @@ keywords = [ "finance", "stocks" ]
 readme = "README.md"
 edition = "2018"
 
+include = [ "Cargo.toml", "LICENSE", "README.md", "src/**/*.rs" ]
+
+repository = "https://github.com/fbriden/market-finance-rs"
+homepage = "https://github.com/fbriden/market-finance-rs"
+
 [features]
 
 # By default only allow formatting to keep the dependency list as small as possible
