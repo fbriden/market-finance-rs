@@ -1,9 +1,11 @@
+use std::cmp::Ordering;
 use super::Timestamped;
 
 /// A single 'bar' of information for OHLC (+volume) pricing data over a unit
 /// of time.
-/// 
-/// The unit of time is defined by whatever function returns the Bar, but is
+///
+///  * Bars are ordered by the timestamp.
+///  * The unit of time is defined by whatever function returns the Bar, but is
 /// generally one day.
 #[derive(Clone, Copy, Debug)]
 pub struct Bar {
@@ -24,6 +26,16 @@ pub struct Bar {
 
    /// The optional volume traded during the unit of time
    pub volume: Option<u64>
+}
+impl Eq for Bar {}
+impl Ord for Bar {
+   fn cmp(&self, other: &Self) -> Ordering { self.timestamp.cmp(&other.timestamp) }
+}
+impl PartialOrd for Bar {
+   fn partial_cmp(&self, other: &Self) -> Option<Ordering> { Some(self.cmp(other)) }
+}
+impl PartialEq for Bar {
+   fn eq(&self, other: &Self) -> bool { self.timestamp == other.timestamp }
 }
 impl Timestamped for Bar {
    /// Gets the timestamp in millisecond accuracy
