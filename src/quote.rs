@@ -17,10 +17,10 @@ pub enum TradingSession {
 }
 
 /// A symbol's quote at a period in time
-#[derive(Clone, Copy, Debug)]
-pub struct Quote<'a> {
+#[derive(Clone, Debug)]
+pub struct Quote {
    /// The symbol for the quote
-   pub symbol: &'a str,
+   pub symbol: String,
 
    /// The timestamp of the quote in millisecond accuracy
    pub timestamp: u64,
@@ -34,7 +34,7 @@ pub struct Quote<'a> {
    /// The volume (daily or transactional) of the symbol
    pub volume: u64
 }
-impl<'a> Timestamped for Quote<'a> {
+impl Timestamped for Quote {
    /// Gets the timestamp in millisecond accuracy
    fn timestamp_millis(&self) -> u64 { self.timestamp }
 }
@@ -50,19 +50,19 @@ mod tests {
    #[test]
    fn verify_datetime() {
       let dt = Utc.ymd(1970, 1, 1).and_hms_milli(0, 0, 3, 123);
-      let quote = Quote { symbol: "none", timestamp: dt.timestamp_millis() as u64, session: TradingSession::Other, price: 0.1, volume: 0 };
+      let quote = Quote { symbol: "none".to_string(), timestamp: dt.timestamp_millis() as u64, session: TradingSession::Other, price: 0.1, volume: 0 };
       assert_eq!(dt, quote.datetime())
    }
 
    #[test]
    fn verify_timestamp_millis() {
-      let quote = Quote { symbol: "none", timestamp: 3002, session: TradingSession::Other, price: 0.1, volume: 0 };
+      let quote = Quote { symbol: "none".to_string(), timestamp: 3002, session: TradingSession::Other, price: 0.1, volume: 0 };
       assert_eq!(3002, quote.timestamp_millis())
    }
 
    #[test]
    fn verify_timestamp_seconds() {
-      let quote = Quote { symbol: "none", timestamp: 3002, session: TradingSession::Other, price: 0.1, volume: 0 };
+      let quote = Quote { symbol: "none".to_string(), timestamp: 3002, session: TradingSession::Other, price: 0.1, volume: 0 };
       assert_eq!(3, quote.timestamp_seconds())
    }
 }

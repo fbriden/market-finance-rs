@@ -1,6 +1,6 @@
 # Market Finance
 
-A collection of utilities for the financial markets.
+A collection of data structures, algorithms and functions for use with a variety of financial markets.
 
 [![Package][cratesio-image]][cratesio]
 [![Documentation][docsrs-image]][docsrs]
@@ -19,5 +19,5 @@ A collection of utilities for the financial markets.
 Add this to your `Cargo.toml`:
 
 ```toml
-market-finance = "0.1"
+market-finance = "0.2"
 ```

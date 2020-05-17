@@ -1,6 +1,6 @@
 [package]
 name = "market-finance"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Fred Briden <fred.briden@gmail.com>"]
 license = "MIT"
 description = "A collection of utilities for the financial markets."
@@ -20,6 +20,9 @@ default = [ "formatting" ]
 
 # Allows for better formatting of structures - typically around date / times
 formatting = [ "chrono" ]
+
+# Technical indicators - currently in beta and disabled by default
+indicators = []
 
 [dependencies]
 chrono = { version = "0.4", optional = true }
