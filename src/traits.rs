@@ -11,8 +11,8 @@ pub trait Timestamped {
    }
 
    /// Gets the timestamp as the number milliseconds that have elapsed since the EPOCH
-   fn timestamp_millis(&self) -> u64;
+   fn timestamp_millis(&self) -> i64;
 
    /// Gets the timestamp as the number of seconds that have elapsed since the EPOCH
-   fn timestamp_seconds(&self) -> u64 { self.timestamp_millis() / 1_000 }
+   fn timestamp_seconds(&self) -> i64 { self.timestamp_millis() / 1_000 }
 }

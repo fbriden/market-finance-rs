@@ -10,7 +10,7 @@ use super::Timestamped;
 #[derive(Clone, Copy, Debug)]
 pub struct Bar {
    /// A time during the unit of time - usually the time at open.
-   pub timestamp: u64,
+   pub timestamp: i64,
 
    /// The price at the start of the unit of time
    pub open: f64,
@@ -39,7 +39,7 @@ impl PartialEq for Bar {
 }
 impl Timestamped for Bar {
    /// Gets the timestamp in millisecond accuracy
-   fn timestamp_millis(&self) -> u64 { self.timestamp }
+   fn timestamp_millis(&self) -> i64 { self.timestamp }
 }
 
 

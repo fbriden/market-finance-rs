@@ -23,7 +23,7 @@ pub struct Quote {
    pub symbol: String,
 
    /// The timestamp of the quote in millisecond accuracy
-   pub timestamp: u64,
+   pub timestamp: i64,
 
    /// The trading session of the quote - pre market / regular hours / after hours
    pub session: TradingSession,
@@ -36,7 +36,7 @@ pub struct Quote {
 }
 impl Timestamped for Quote {
    /// Gets the timestamp in millisecond accuracy
-   fn timestamp_millis(&self) -> u64 { self.timestamp }
+   fn timestamp_millis(&self) -> i64 { self.timestamp }
 }
 
 
@@ -50,7 +50,7 @@ mod tests {
    #[test]
    fn verify_datetime() {
       let dt = Utc.ymd(1970, 1, 1).and_hms_milli(0, 0, 3, 123);
-      let quote = Quote { symbol: "none".to_string(), timestamp: dt.timestamp_millis() as u64, session: TradingSession::Other, price: 0.1, volume: 0 };
+      let quote = Quote { symbol: "none".to_string(), timestamp: dt.timestamp_millis(), session: TradingSession::Other, price: 0.1, volume: 0 };
       assert_eq!(dt, quote.datetime())
    }
 
