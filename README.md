@@ -19,5 +19,5 @@ A collection of data structures, algorithms and functions for use with a variety
 Add this to your `Cargo.toml`:
 
 ```toml
-market-finance = "0.2"
+market-finance = "0.3"
 ```
