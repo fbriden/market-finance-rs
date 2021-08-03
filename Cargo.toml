@@ -1,6 +1,6 @@
 [package]
 name = "market-finance"
-version = "0.3.0"
+version = "0.3.1"
 authors = ["Fred Briden <fred.briden@gmail.com>"]
 license = "MIT"
 description = "A collection of utilities for the financial markets."
