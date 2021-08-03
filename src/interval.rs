@@ -1,4 +1,5 @@
 use std::fmt;
+use std::str::FromStr;
 
 /// An interval use when requesting periods of quote information.
 /// 
@@ -7,7 +8,7 @@ use std::fmt;
 /// 
 /// `m` is for minutes. `mo` is for months, the rest should be self explanatory
 #[allow(non_camel_case_types)]
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum Interval { _1m, _2m, _5m, _15m, _30m, _60m, _90m, _1d, _5d, _1mo, _3mo, _6mo, _1y, _2y, _5y, _10y, _ytd, _max }
 impl Interval {
    pub fn is_intraday(&self) -> bool {
@@ -23,10 +24,48 @@ impl fmt::Display for Interval {
    }
 }
 
+impl FromStr for Interval {
+   type Err = InvalidIntervalError;
+
+   fn from_str(s: &str) -> Result<Self, InvalidIntervalError> {
+      match s {
+         "1m" => Ok(Interval::_1m),
+         "2m" => Ok(Interval::_2m),
+         "5m" => Ok(Interval::_5m),
+         "15m" => Ok(Interval::_15m),
+         "30m" => Ok(Interval::_30m),
+         "60m" => Ok(Interval::_60m),
+         "90m" => Ok(Interval::_90m),
+         "1d" => Ok(Interval::_1d),
+         "5d" => Ok(Interval::_5d),
+         "1mo" => Ok(Interval::_1mo),
+         "3mo" => Ok(Interval::_3mo),
+         "6mo" => Ok(Interval::_6mo),
+         "1y" => Ok(Interval::_1y),
+         "2y" => Ok(Interval::_2y),
+         "5y" => Ok(Interval::_5y),
+         "10y" => Ok(Interval::_10y),
+         "ytd" => Ok(Interval::_ytd),
+         "max" => Ok(Interval::_max),
+         _ => Err(InvalidIntervalError)
+      }
+   }
+}
+
+#[derive(Debug, Clone)]
+pub struct InvalidIntervalError;
+
+impl fmt::Display for InvalidIntervalError {
+   fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+       write!(f, "Invalid interval value")
+   }
+}
+
 
 #[cfg(test)]
 mod tests {
    use super::Interval;
+   use std::str::FromStr;
 
    // Validate that the intervals are all set up correctly
    // and that there are no copy-paste issues
@@ -34,6 +73,7 @@ mod tests {
    fn test_interval(interval: Interval, value: &str, is_intraday: bool) {
       assert_eq!(format!("{}", interval), value);
       assert_eq!(interval.is_intraday(), is_intraday);
+      assert_eq!(Interval::from_str(value).unwrap(), interval)
    }
 
    #[test] fn interval_1m() { test_interval(Interval::_1m, "1m", true); }
